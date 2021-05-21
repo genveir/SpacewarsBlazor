@@ -15,7 +15,7 @@ namespace SpacewarsBlazor.Game
 
         public Ship(WrappingLocation location, Color color, ShipParameters parameters = null)
         {
-            this.ShipParameters = parameters ?? new ShipParameters();
+            this.ShipParameters = parameters ?? ShipParameters.Default();
 
             this.Location = location;
             this.Heading = Direction.FromDegrees(0);
@@ -58,8 +58,8 @@ namespace SpacewarsBlazor.Game
                 var fireVector = new vector(Heading, new Distance(ShipParameters.BulletVelocity));
                 var bulletVector = this.Movement + fireVector;
 
-                var bulletLeft = new Bullet(bitLeft, bulletVector, ShipParameters.BulletSize, ShipParameters.BulletDamage);
-                var bulletRight = new Bullet(bitRight, bulletVector, ShipParameters.BulletSize, ShipParameters.BulletDamage);
+                var bulletLeft = new Bullet(bitLeft, bulletVector, ShipParameters.BulletSize, ShipParameters.BulletDamage, ShipParameters.BulletLifetime);
+                var bulletRight = new Bullet(bitRight, bulletVector, ShipParameters.BulletSize, ShipParameters.BulletDamage, ShipParameters.BulletLifetime);
                 bulletLeft.Update();
                 bulletRight.Update();
 

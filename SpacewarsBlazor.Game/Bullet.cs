@@ -24,14 +24,14 @@ namespace SpacewarsBlazor.Game
 
         public long Damage { get; private set; }
 
-        public Bullet(ILocation location, vector vector, long size, long damage)
+        public Bullet(ILocation location, vector vector, long size, long damage, TimeSpan timeout)
         {
             this.Location = location;
             this.Id = bulletIdCounter++;
             this.Movement = vector;
             this.Size = size;
             this.Damage = damage;
-            this.timeOutMoment = DateTime.Now.AddSeconds(3);
+            this.timeOutMoment = DateTime.Now.Add(timeout);
         }
 
         public long Id { get; }

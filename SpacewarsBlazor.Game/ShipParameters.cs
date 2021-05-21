@@ -9,18 +9,40 @@ namespace SpacewarsBlazor.Game
 {
     public class ShipParameters
     {
-        public long Size { get; set; } = 1500;
+        protected ShipParameters() { }
 
-        public long Energy { get; set; } = 1000;
-        public long EnergyRegen { get; set; } = 3;
+        public static ShipParameters Default()
+        {
+            return new ShipParameters()
+            {
+                Size = 1500,
+                Energy = 1000,
+                EnergyRegen = 3,
+                RotationSpeed = radian.FromDegree(5),
+                AccelerationSpeed = new Distance(6.0),
+                MinEnergyToFire = 100,
+                EnergyToFire = 30,
+                BulletVelocity = new Distance(500.0d),
+                BulletSize = 2,
+                BulletDamage = 500,
+                BulletLifetime = TimeSpan.FromMilliseconds(3000)
+            };
+        }
 
-        public radian RotationSpeed { get; set; } = radian.FromDegree(5);
-        public Distance AccelerationSpeed { get; set; } = new Distance(6.0d);
+        public long Size { get; private set; }
 
-        public long MinEnergyToFire { get; set; } = 100;
-        public long EnergyToFire { get; set; } = 20;
-        public Distance BulletVelocity { get; set; } = new Distance(500.0d);
-        public long BulletSize { get; set; } = 2;
-        public long BulletDamage { get; set; } = 500;
+        public long Energy { get; private set; }
+        public long EnergyRegen { get; private set; }
+
+        public radian RotationSpeed { get; private set; }
+        public Distance AccelerationSpeed { get; private set; }
+
+        public long MinEnergyToFire { get; private set; }
+        public long EnergyToFire { get; private set; }
+
+        public Distance BulletVelocity { get; private set; }
+        public long BulletSize { get; private set; }
+        public long BulletDamage { get; private set; }
+        public TimeSpan BulletLifetime { get; private set; }
     }
 }
