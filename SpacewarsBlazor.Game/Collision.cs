@@ -151,7 +151,7 @@ namespace SpacewarsBlazor.Game
         private bool CheckCollision(CollisionObject first, CollisionObject second)
         {
             var distance = Distance.Calculate(first.location, second.location);
-            var allowedDistance = (first.Size + second.Size) / 2;
+            var allowedDistance = (first.Size + second.Size);
             var collides = distance < allowedDistance;
 
             return collides;

@@ -17,7 +17,7 @@ namespace SpacewarsBlazor.Game
             this.Heading = Direction.FromDegrees(0);
             this.Movement = vector.Zero;
             this.Color = color;
-            this.Size = 1000;
+            this.Size = 1500;
         }
 
         public void Update(ShipCommands commands)
