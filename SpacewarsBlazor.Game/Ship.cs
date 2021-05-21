@@ -33,6 +33,8 @@ namespace SpacewarsBlazor.Game
                 commands.Fire = false;
             }
 
+            this.Shield += 2;
+            if (Shield > 1000) Shield = 1000;
             this.Location = newLocation;
         }
 
@@ -47,6 +49,12 @@ namespace SpacewarsBlazor.Game
             Game.Subscribe(bullet);
         }
 
+        public void Hit(Bullet bullet)
+        {
+            this.Shield -= 500;
+            if (this.Shield < -500) this.Shield = -500;
+        }
+
         public vector Movement { get; private set; }
 
         public Direction Heading { get; private set; }
@@ -54,6 +62,8 @@ namespace SpacewarsBlazor.Game
         public ILocation Location { get; private set; }
 
         public long Size { get; private set; }
+
+        public long Shield { get; private set; } = 100;
 
         public Color Color { get; private set; }
     }

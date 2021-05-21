@@ -66,7 +66,7 @@ namespace SpacewarsBlazor.Game
             foreach (var co in players) buckets[co.location.X / 100][co.location.Y / 100].Add(co);
             foreach (var co in bullets) buckets[co.location.X / 100][co.location.Y / 100].Add(co);
 
-            var result = new List<CollisionPair>();
+            var result = new HashSet<CollisionPair>();
             foreach (var bucket in allBuckets) bucket.ResolveCollisions(result);
 
             return result;
@@ -113,7 +113,7 @@ namespace SpacewarsBlazor.Game
             bullets.Add(collisionBullet);
         }
 
-        public void ResolveCollisions(List<CollisionPair> result)
+        public void ResolveCollisions(HashSet<CollisionPair> result)
         {
             var relevantBuckets = neighbours.Where(n => !n.Handled).Append(this);
 
@@ -203,6 +203,24 @@ namespace SpacewarsBlazor.Game
                 case CollisionType.Bullet: return $"collision between player {Collider.Id} and bullet {Bullet.Id}";
                 default: return "faulty collision";
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)(Collider.Id + (OtherPlayer?.Id ?? 0) + (Bullet?.Id ?? 0));
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj)) return true;
+            
+            var other = obj as CollisionPair;
+            if (other == null) return false;
+            return
+                other.CollisionType == this.CollisionType &&
+                other.Collider.Id == this.Collider.Id &&
+                other.OtherPlayer?.Id == this.OtherPlayer?.Id &&
+                other.Bullet?.Id == this.Bullet?.Id;
         }
     }
 }

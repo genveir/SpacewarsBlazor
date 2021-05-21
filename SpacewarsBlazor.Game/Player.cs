@@ -14,7 +14,7 @@ namespace SpacewarsBlazor.Game
         private static Random random = new Random();
 
         public bool Inactive = false;
-        public bool CurrentlyDead = false;
+        public bool CurrentlyDead => ship.Shield < 0;
 
         public long Id { get; }
 
@@ -23,6 +23,8 @@ namespace SpacewarsBlazor.Game
         public float Heading => (float)ship.Heading.InRadians.toDouble();
         public string Color => ColorTranslator.ToHtml(ship.Color);
         public double Size => ship.Size / 100;
+
+        public long Shield => ship.Shield;
 
         public ShipCommands Commands { get; }
 
@@ -48,16 +50,12 @@ namespace SpacewarsBlazor.Game
             else
             {
                 ship.Update(ShipCommands.None);
-
-                if (DeadUntil < DateTime.Now) this.CurrentlyDead = false;
             }
         }
 
-        private DateTime DeadUntil = DateTime.MinValue;
         public void Hit(Bullet bullet)
         {
-            this.CurrentlyDead = true;
-            DeadUntil = DateTime.Now.AddSeconds(2);
+            ship.Hit(bullet);
         }
 
         private DateTime LastActive { get; set; } = DateTime.Now;
