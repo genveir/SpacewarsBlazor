@@ -27,7 +27,7 @@ namespace SpacewarsBlazor.Game
             this.Location = location;
             this.Id = bulletIdCounter++;
             this.Movement = vector;
-            this.timeOutMoment = DateTime.Now.AddSeconds(10);
+            this.timeOutMoment = DateTime.Now.AddSeconds(3);
         }
 
         public long Id { get; }

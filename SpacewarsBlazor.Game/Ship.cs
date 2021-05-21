@@ -33,7 +33,7 @@ namespace SpacewarsBlazor.Game
                 commands.Fire = false;
             }
 
-            this.Energy += 2;
+            this.Energy += 3;
             if (Energy > 1000) Energy = 1000;
             this.Location = newLocation;
         }
@@ -42,7 +42,7 @@ namespace SpacewarsBlazor.Game
         {
             if (this.Energy > 100)
             {
-                this.Energy -= 50;
+                this.Energy -= 20;
 
                 var orthogonalDirection = Direction.FromRadian(Heading.InRadians + radian.FromDegree(-90));
 
