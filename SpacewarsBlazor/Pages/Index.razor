@@ -1,11 +1,10 @@
 ﻿@page "/"
 @inject IJSRuntime jsRunTime
 @inject Player player
-
-<div class="row align-items-center">
-    <div class="col">
-        <div class="container-canvas">
-            <div tabindex="0" @onkeydown="KeyDown" @onkeyup="KeyUp">
+<div tabindex="0" @onkeydown="KeyDown" @onkeyup="KeyUp">
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="container-canvas">
                 <BECanvas Width="@Game.MaxX" Height="@Game.MaxY" @ref="_canvasReference"></BECanvas>
             </div>
         </div>
