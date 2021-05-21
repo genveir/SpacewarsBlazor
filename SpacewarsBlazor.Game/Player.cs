@@ -14,7 +14,7 @@ namespace SpacewarsBlazor.Game
         private static Random random = new Random();
 
         public bool Inactive = false;
-        public bool CurrentlyDead => ship.Shield < 0;
+        public bool CurrentlyDead => ship.Energy < 0;
 
         public long Id { get; }
 
@@ -24,7 +24,7 @@ namespace SpacewarsBlazor.Game
         public string Color => ColorTranslator.ToHtml(ship.Color);
         public double Size => ship.Size / 100;
 
-        public long Shield => ship.Shield;
+        public long Energy => ship.Energy;
 
         public ShipCommands Commands { get; }
 

@@ -33,26 +33,39 @@ namespace SpacewarsBlazor.Game
                 commands.Fire = false;
             }
 
-            this.Shield += 2;
-            if (Shield > 1000) Shield = 1000;
+            this.Energy += 2;
+            if (Energy > 1000) Energy = 1000;
             this.Location = newLocation;
         }
 
         private void Fire()
         {
-            var rightInFront = new WrappingLocation(this.Location, Heading, new Distance(5000.0d));
-            var fireVector = new vector(Heading, new Distance(500.0d));
-            var bulletVector = this.Movement + fireVector;
+            if (this.Energy > 100)
+            {
+                this.Energy -= 50;
 
-            var bullet = new Bullet(rightInFront, bulletVector);
+                var orthogonalDirection = Direction.FromRadian(Heading.InRadians + radian.FromDegree(-90));
 
-            Game.Subscribe(bullet);
+                var rightInFront = new WrappingLocation(this.Location, Heading, new Distance(2000.0d));
+                var bitLeft = new WrappingLocation(rightInFront, orthogonalDirection, new Distance(1000.0d));
+                var bitRight = new WrappingLocation(rightInFront, orthogonalDirection, new Distance(-1000.0d));
+                var fireVector = new vector(Heading, new Distance(500.0d));
+                var bulletVector = this.Movement + fireVector;
+
+                var bulletLeft = new Bullet(bitLeft, bulletVector);
+                var bulletRight = new Bullet(bitRight, bulletVector);
+                bulletLeft.Update();
+                bulletRight.Update();
+
+                Game.Subscribe(bulletLeft);
+                Game.Subscribe(bulletRight);
+            }
         }
 
         public void Hit(Bullet bullet)
         {
-            this.Shield -= 500;
-            if (this.Shield < -500) this.Shield = -500;
+            this.Energy -= 500;
+            if (this.Energy < -500) this.Energy = -500;
         }
 
         public vector Movement { get; private set; }
@@ -63,7 +76,7 @@ namespace SpacewarsBlazor.Game
 
         public long Size { get; private set; }
 
-        public long Shield { get; private set; } = 100;
+        public long Energy { get; private set; } = 100;
 
         public Color Color { get; private set; }
     }

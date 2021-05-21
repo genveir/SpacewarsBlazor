@@ -63,7 +63,7 @@
 
         await this._context.SetFontAsync("24px Roboto");
         await this._context.SetFillStyleAsync("#ffffff");
-        await this._context.FillTextAsync($"Shield: {player.Shield}", 550, 800);
+        await this._context.FillTextAsync($"Energy: {player.Energy}", 550, 800);
 
         var allPlayers = Game.PlayerSnapshot;
         foreach (var _player in allPlayers)
