@@ -20,13 +20,17 @@ namespace SpacewarsBlazor.Game
 
         public string Color = ColorTranslator.ToHtml(System.Drawing.Color.OrangeRed);
 
-        public long Size => 200 / 100;
+        public long Size { get; private set; }
 
-        public Bullet(ILocation location, vector vector)
+        public long Damage { get; private set; }
+
+        public Bullet(ILocation location, vector vector, long size, long damage)
         {
             this.Location = location;
             this.Id = bulletIdCounter++;
             this.Movement = vector;
+            this.Size = size;
+            this.Damage = damage;
             this.timeOutMoment = DateTime.Now.AddSeconds(3);
         }
 
