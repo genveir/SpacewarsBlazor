@@ -1,6 +1,9 @@
-﻿@page "/"
+﻿@inherits DisposableComponent
+
+@page "/"
 @inject IJSRuntime jsRunTime
 @inject Player player
+
 <div tabindex="0" @onkeydown="KeyDown" @onkeyup="KeyUp">
     <div class="row align-items-center">
         <div class="col">
@@ -13,6 +16,10 @@
 
 @code {
     private Canvas2DContext _context;
+
+    private bool isConnected = true;
+
+    public override void Dispose() => isConnected = false;
 
     protected Blazor.Extensions.BECanvasComponent _canvasReference;
 
@@ -34,7 +41,7 @@
 
     private async Task TouchLoop()
     {
-        while (true)
+        while (isConnected)
         {
             player.Touch();
 
