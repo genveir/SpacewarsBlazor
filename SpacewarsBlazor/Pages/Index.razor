@@ -22,9 +22,23 @@
         {
             Game.Subscribe(player);
 
+#pragma warning disable CS4014 // I 'want' this method to continue without waiting.
+            Task.Run(() => TouchLoop());
+#pragma warning restore CS4014
+
             this._context = await this._canvasReference.CreateCanvas2DAsync();
 
             await jsRunTime.InvokeAsync<object>("subscribeToAnimationLoop", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private async Task TouchLoop()
+    {
+        while (true)
+        {
+            player.Touch();
+
+            await Task.Delay(1000);
         }
     }
 
@@ -46,8 +60,6 @@
     [JSInvokable]
     public async ValueTask RenderFrame(float timeStamp)
     {
-        player.Touch();
-
         await this._context.BeginBatchAsync();
 
         if (player.Inactive) await this._context.SetFillStyleAsync("#ff0000");
