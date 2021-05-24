@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SpacewarsBlazor.Game
 {
-    public class Bullet : IWithTimeout, IMovingBody, IUpdatable
+    public class Bullet : BodyBase, IWithTimeout, IUpdatable
     {
         private static long bulletIdCounter = 0;
 
@@ -24,21 +24,15 @@ namespace SpacewarsBlazor.Game
 
         public long Damage { get; private set; }
 
-        public Bullet(ILocation location, vector vector, long size, long damage, TimeSpan timeout)
+        public Bullet(ILocation location, vector vector, long size, long damage, TimeSpan timeout) : base(location, vector)
         {
-            this.Location = location;
             this.Id = bulletIdCounter++;
-            this.Movement = vector;
             this.Size = size;
             this.Damage = damage;
             this.timeOutMoment = DateTime.Now.Add(timeout);
         }
 
         public long Id { get; }
-
-        public vector Movement { get; }
-
-        public ILocation Location { get; private set; }
 
         public bool IsTimedOut => timeOutMoment < DateTime.Now;
 

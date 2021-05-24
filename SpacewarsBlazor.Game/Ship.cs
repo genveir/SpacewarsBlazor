@@ -9,17 +9,15 @@ using System.Threading.Tasks;
 
 namespace SpacewarsBlazor.Game
 {
-    class Ship : IBodyWithHeading, IMovingBody
+    class Ship : BodyBase
     {
         private ShipParameters ShipParameters { get; set; }
 
-        public Ship(WrappingLocation location, Color color, ShipParameters parameters = null)
+        public Ship(WrappingLocation location, Color color, ShipParameters parameters = null) : base(location)
         {
             this.ShipParameters = parameters ?? ShipParameters.Default();
+            this.bodyBehavior = new BodyBaseBehavior(ShipParameters.MaximumSpeed);
 
-            this.Location = location;
-            this.Heading = Direction.FromDegrees(0);
-            this.Movement = vector.Zero;
             this.Color = color;
             this.Size = ShipParameters.Size;
             this.Energy = ShipParameters.Energy;
@@ -27,11 +25,9 @@ namespace SpacewarsBlazor.Game
 
         public void Update(ShipCommands commands)
         {
-            var newLocation = new WrappingLocation(Location, Movement);
-
-            if (commands.TurnLeft) Heading = Heading - Direction.FromRadian(ShipParameters.RotationSpeed);
-            if (commands.TurnRight) Heading = Heading + Direction.FromRadian(ShipParameters.RotationSpeed);
-            if (commands.Accelerate) Movement = Movement + new vector(Heading, new Distance(ShipParameters.AccelerationSpeed));
+            if (commands.TurnLeft) TurnLeft(Direction.FromRadian(ShipParameters.RotationSpeed));
+            if (commands.TurnRight) TurnRight(Direction.FromRadian(ShipParameters.RotationSpeed));
+            if (commands.Accelerate) AccelerateAlongHeading(new Distance(ShipParameters.AccelerationSpeed));
             if (commands.Fire)
             {
                 Fire();
@@ -40,6 +36,9 @@ namespace SpacewarsBlazor.Game
 
             this.Energy += ShipParameters.EnergyRegen;
             if (Energy > ShipParameters.Energy) Energy = ShipParameters.Energy;
+
+            var newLocation = new WrappingLocation(this.Location, Movement);
+
             this.Location = newLocation;
         }
 
@@ -73,12 +72,6 @@ namespace SpacewarsBlazor.Game
             this.Energy -= bullet.Damage;
             if (this.Energy < -500) this.Energy = -500;
         }
-
-        public vector Movement { get; private set; }
-
-        public Direction Heading { get; private set; }
-
-        public ILocation Location { get; private set; }
 
         public long Size { get; private set; }
 

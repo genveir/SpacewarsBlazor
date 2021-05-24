@@ -20,6 +20,7 @@ namespace SpacewarsBlazor.Game
                 EnergyRegen = 3,
                 RotationSpeed = radian.FromDegree(5),
                 AccelerationSpeed = new Distance(6.0),
+                MaximumSpeed = new Distance(700),
                 MinEnergyToFire = 100,
                 EnergyToFire = 30,
                 BulletVelocity = new Distance(500.0d),
@@ -36,6 +37,7 @@ namespace SpacewarsBlazor.Game
 
         public radian RotationSpeed { get; private set; }
         public Distance AccelerationSpeed { get; private set; }
+        public Distance MaximumSpeed { get; private set; }
 
         public long MinEnergyToFire { get; private set; }
         public long EnergyToFire { get; private set; }
