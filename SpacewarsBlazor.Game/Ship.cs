@@ -27,7 +27,7 @@ namespace SpacewarsBlazor.Game
         {
             if (commands.TurnLeft) TurnLeft(Direction.FromRadian(ShipParameters.RotationSpeed));
             if (commands.TurnRight) TurnRight(Direction.FromRadian(ShipParameters.RotationSpeed));
-            if (commands.Accelerate) AccelerateAlongHeading(new Distance(ShipParameters.AccelerationSpeed));
+            if (commands.Accelerate) AccelerateAlongHeading(ShipParameters.AccelerationSpeed);
             if (commands.Fire)
             {
                 Fire();
@@ -54,7 +54,7 @@ namespace SpacewarsBlazor.Game
                 var bitLeft = new WrappingLocation(rightInFront, orthogonalDirection, new Distance(1000.0d));
                 var bitRight = new WrappingLocation(rightInFront, orthogonalDirection, new Distance(-1000.0d));
 
-                var fireVector = new vector(Heading, new Distance(ShipParameters.BulletVelocity));
+                var fireVector = new vector(Heading, ShipParameters.BulletVelocity);
                 var bulletVector = this.Movement + fireVector;
 
                 var bulletLeft = new Bullet(bitLeft, bulletVector, ShipParameters.BulletSize, ShipParameters.BulletDamage, ShipParameters.BulletLifetime);

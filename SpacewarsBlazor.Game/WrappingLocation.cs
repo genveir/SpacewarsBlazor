@@ -1,4 +1,5 @@
 ﻿using Geerten.Movement.Geometry;
+using Geerten.Movement.Location;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +35,8 @@ namespace SpacewarsBlazor.Game
 
         public WrappingLocation(ILocation startingLocation, Direction direction, Distance distance)
         {
-            this.X = (long)(Math.Sin(direction.InRadians.toDouble()) * distance) + startingLocation.X;
-            this.Y = (long)(Math.Cos(direction.InRadians.toDouble()) * distance) + startingLocation.Y;
+            this.X = (long)(Math.Sin(direction.InRadians.toDouble()) * distance.Value) + startingLocation.X;
+            this.Y = (long)(Math.Cos(direction.InRadians.toDouble()) * distance.Value) + startingLocation.Y;
         }
 
         public WrappingLocation(ILocation startingLocation, vector difference)
