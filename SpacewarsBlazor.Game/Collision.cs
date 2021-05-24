@@ -1,4 +1,5 @@
 ﻿using Geerten.Movement.Geometry;
+using Geerten.Movement.Location;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -152,7 +153,7 @@ namespace SpacewarsBlazor.Game
         {
             var distance = Distance.Calculate(first.location, second.location);
             var allowedDistance = (first.Size + second.Size);
-            var collides = distance < allowedDistance;
+            var collides = distance.Value < allowedDistance;
 
             return collides;
         }
