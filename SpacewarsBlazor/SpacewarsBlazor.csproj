@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazor.Extensions.Canvas" Version="1.1.1" />
-    <PackageReference Include="Geerten.MovementLib" Version="0.0.5" />
+    <PackageReference Include="Geerten.Movement" Version="0.0.5" />
   </ItemGroup>
 
   <ItemGroup>
