@@ -1,5 +1,5 @@
-﻿using Geerten.MovementLib.Geometry;
-using Geerten.MovementLib.Movement;
+﻿using Geerten.Movement.Geometry;
+using Geerten.Movement.Bodies;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
