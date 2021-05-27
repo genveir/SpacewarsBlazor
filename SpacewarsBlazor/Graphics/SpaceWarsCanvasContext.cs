@@ -31,34 +31,35 @@ namespace SpacewarsBlazor.Graphics
         {
             await this.context.BeginBatchAsync();
 
+            await DrawBackGround();
+
+            await DrawShips();
+
+            await DrawBullets();
+
+            await DrawOwnShipIndicator();
+
+            await DrawShipEnergyIndicator();
+
+            await this.context.EndBatchAsync();
+        }
+
+        private async Task DrawBackGround()
+        {
             if (player.Inactive) await this.context.SetFillStyleAsync("#ff0000");
             else if (player.CurrentlyDead) await this.context.SetFillStyleAsync("#400000");
             else await this.context.SetFillStyleAsync("#000040");
 
             await this.context.FillRectAsync(0, 0, Game.MaxX, Game.MaxY);
+        }
 
-            await this.context.BeginPathAsync();
-            await this.context.ArcAsync(player.X, player.Y, 20, 0, 2 * Math.PI, false);
-            await this.context.SetStrokeStyleAsync("#ffffff");
-            await this.context.StrokeAsync();
-
-            await this.context.SetFontAsync("24px Roboto");
-            await this.context.SetFillStyleAsync("#ffffff");
-            await this.context.FillTextAsync($"Energy: {player.Energy}", 550, 800);
-
+        private async Task DrawShips()
+        {
             var allPlayers = Game.PlayerSnapshot;
             foreach (var _player in allPlayers)
             {
                 await DrawShip(_player);
             }
-
-            var allBullets = Game.BulletSnapshot;
-            foreach (var _bullet in allBullets)
-            {
-                await DrawBullet(_bullet);
-            }
-
-            await this.context.EndBatchAsync();
         }
 
         private async Task DrawShip(Player _player)
@@ -90,12 +91,36 @@ namespace SpacewarsBlazor.Graphics
             await this.context.RestoreAsync();
         }
 
+        private async Task DrawBullets()
+        {
+            var allBullets = Game.BulletSnapshot;
+            foreach (var _bullet in allBullets)
+            {
+                await DrawBullet(_bullet);
+            }
+        }
+
         private async Task DrawBullet(Bullet _bullet)
         {
             await this.context.BeginPathAsync();
             await this.context.ArcAsync(_bullet.X, _bullet.Y, _bullet.Size, 0, 2 * Math.PI, false);
             await this.context.SetFillStyleAsync(_bullet.Color);
             await this.context.FillAsync();
+        }
+
+        private async Task DrawOwnShipIndicator()
+        {
+            await this.context.BeginPathAsync();
+            await this.context.ArcAsync(player.X, player.Y, 20, 0, 2 * Math.PI, false);
+            await this.context.SetStrokeStyleAsync("#ffffff");
+            await this.context.StrokeAsync();
+        }
+
+        private async Task DrawShipEnergyIndicator()
+        {
+            await this.context.SetFontAsync("24px Roboto");
+            await this.context.SetFillStyleAsync("#ffffff");
+            await this.context.FillTextAsync($"Energy: {player.Energy}", 550, 800);
         }
     }
 }
