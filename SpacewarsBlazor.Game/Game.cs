@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SpacewarsBlazor.Game
+namespace SpacewarsBlazor.Engine
 {
     public static class Game
     {

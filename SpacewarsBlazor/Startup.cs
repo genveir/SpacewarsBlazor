@@ -28,7 +28,7 @@ namespace SpacewarsBlazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            Game.Services.AddServices(services);
+            Engine.Services.AddServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

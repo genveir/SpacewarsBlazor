@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpacewarsBlazor.Game
+namespace SpacewarsBlazor.Engine
 {
     public class ShipParameters
     {

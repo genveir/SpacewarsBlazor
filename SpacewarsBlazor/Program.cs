@@ -13,7 +13,7 @@ namespace SpacewarsBlazor
     {
         public static void Main(string[] args)
         {
-            Task.Run(() => Game.Game.UpdateLoop());
+            Task.Run(() => Engine.Game.UpdateLoop());
 
             CreateHostBuilder(args).Build().Run();
         }

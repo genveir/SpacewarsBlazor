@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Geerten.Movement.Location;
 
-namespace SpacewarsBlazor.Game
+namespace SpacewarsBlazor.Engine
 {
     public class Bullet : BodyBase, IWithTimeout, IUpdatable
     {

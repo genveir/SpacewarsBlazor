@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacewarsBlazor", "SpacewarsBlazor\SpacewarsBlazor.csproj", "{499040C8-6588-42D8-B3D4-4F98F9AA5E85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacewarsBlazor.Game", "SpacewarsBlazor.Game\SpacewarsBlazor.Game.csproj", "{85B639A5-C44B-4EE0-8CD3-3998451CB4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpacewarsBlazor.Engine", "SpacewarsBlazor.Game\SpacewarsBlazor.Engine.csproj", "{85B639A5-C44B-4EE0-8CD3-3998451CB4BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
