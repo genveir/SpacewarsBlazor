@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SpacewarsBlazor.Game\SpacewarsBlazor.Engine.csproj" />
+    <ProjectReference Include="..\SpacewarsBlazor.Engine\SpacewarsBlazor.Engine.csproj" />
   </ItemGroup>
 
 </Project>
