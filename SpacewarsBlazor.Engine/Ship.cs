@@ -28,6 +28,7 @@ namespace SpacewarsBlazor.Engine
             if (commands.TurnLeft) TurnLeft(Direction.FromRadian(ShipParameters.RotationSpeed));
             if (commands.TurnRight) TurnRight(Direction.FromRadian(ShipParameters.RotationSpeed));
             if (commands.Accelerate) AccelerateAlongHeading(ShipParameters.AccelerationSpeed);
+            if (commands.Decelerate) DecelerateAlongHeading(ShipParameters.AccelerationSpeed);
             if (commands.Fire)
             {
                 Fire();
@@ -87,6 +88,7 @@ namespace SpacewarsBlazor.Engine
         public bool TurnLeft;
         public bool TurnRight;
         public bool Accelerate;
+        public bool Decelerate;
         public bool Fire;
     }
 }

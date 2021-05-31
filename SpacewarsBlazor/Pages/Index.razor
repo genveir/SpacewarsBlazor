@@ -52,6 +52,7 @@
     protected void KeyUp(KeyboardEventArgs e)
     {
         if (e.Key == "ArrowUp") player.Commands.Accelerate = false;
+        if (e.Key == "ArrowDown") player.Commands.Decelerate = false;
         if (e.Key == "ArrowLeft") player.Commands.TurnLeft = false;
         if (e.Key == "ArrowRight") player.Commands.TurnRight = false;
     }
@@ -59,6 +60,7 @@
     protected void KeyDown(KeyboardEventArgs e)
     {
         if (e.Key == "ArrowUp") player.Commands.Accelerate = true;
+        if (e.Key == "ArrowDown") player.Commands.Decelerate = true;
         if (e.Key == "ArrowLeft") player.Commands.TurnLeft = true;
         if (e.Key == "ArrowRight") player.Commands.TurnRight = true;
         if (e.CtrlKey) player.Commands.Fire = true;
